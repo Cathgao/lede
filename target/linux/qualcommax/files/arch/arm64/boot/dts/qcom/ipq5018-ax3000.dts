@@ -237,7 +237,7 @@
 					"ath11k/IPQ5018/hw1.0/m3_fw.mdt",
 					"ath11k/qcn6122/hw1.0/m3_fw.mdt";
 
-    qcom,bootargs_smem = <507>;
+
 	boot-args =
 			</*       type: */ 0x2 /* PCIE1 */
 		     /*     length: */ 4
@@ -248,7 +248,6 @@
 	// IPQ5018
 	q6_wcss_pd1: pd-1 {
 		firmware-name = "ath11k/IPQ5018/hw1.0/q6_fw.mdt";
-        m3_firmware = "ath11k/IPQ5018/hw1.0/m3_fw.mdt";
 		resets =
 			<&gcc GCC_WCSSAON_RESET>,
 			<&gcc GCC_WCSS_BCR>,
@@ -284,14 +283,11 @@
 			"shutdown",
 			"stop",
 			"spawn";
-        reg = <0x4ab000 0x20>;
-		reg-names = "rmb";
 	};
 
 	// QCN6102 5G
 	q6_wcss_pd2: pd-2 {
 		firmware-name = "ath11k/IPQ5018/hw1.0/q6_fw.mdt";
-        m3_firmware = "ath11k/qcn6122/hw1.0/m3_fw.mdt";
 		interrupts-extended =
 			<&wcss_smp2p_in 16 0>,
 			<&wcss_smp2p_in 17 0>,
@@ -572,6 +568,7 @@
     qcom,multipd_arch;
 	qcom,rproc = <&q6_wcss_pd1>;
 	qcom,userpd-subsys-name = "q6v5_wcss_userpd1";
+	qcom,ath11k-calibration-variant = "Redmi-AX3000";
 	qcom,ath11k-fw-memory-mode = <2>;
 	qcom,bdf-addr = <0x4c400000>;
 	status = "okay";
@@ -581,6 +578,7 @@
     qcom,multipd_arch;
 	qcom,rproc = <&q6_wcss_pd2>;
 	qcom,userpd-subsys-name = "q6v5_wcss_userpd2";
+	qcom,ath11k-calibration-variant = "Redmi-AX3000";
 	qcom,ath11k-fw-memory-mode = <2>;
 	qcom,bdf-addr = <0x4d100000>;
 	qcom,m3-dump-addr = <0x4df00000>;
