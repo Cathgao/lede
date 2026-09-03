@@ -1,0 +1,22 @@
+--- a/src/init/ssdk_init.c
++++ b/src/init/ssdk_init.c
+@@ -2308,6 +2308,8 @@ static int ssdk_dev_event(struct notifie
+ 				if (dev->phydev != NULL) {
+ 					port_id = qca_ssdk_phydev_to_port(priv->device_id,
+ 						dev->phydev);
++					if (!(qca_ssdk_port_bmp_get(priv->device_id) & (0x1 << port_id)))
++						return NOTIFY_DONE;
+ 					rv = p_api->adpt_port_netdev_notify_set(priv, port_id);
+ 					if (rv) {
+ 						SSDK_ERROR("netdev change notify failed\n");
+--- a/src/adpt/mp/adpt_mp_portctrl.c
++++ b/src/adpt/mp/adpt_mp_portctrl.c
+@@ -1183,8 +1183,6 @@ adpt_mp_port_netdev_change_notify(struct
+ 	portbmp[priv->device_id] = qca_ssdk_port_bmp_get(priv->device_id);
+ 
+ 	if(!(portbmp[priv->device_id] & (0x1 << port_id))) {
+-		SSDK_ERROR("netdev change notify with incorrect port %d\n",
+-			port_id);
+-		return SW_BAD_VALUE;
++		return SW_OK;
+ 	}
