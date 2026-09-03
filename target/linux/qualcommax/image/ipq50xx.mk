@@ -128,3 +128,16 @@ define Device/xiaomi_redmi-ax5400
 		ipq-wifi-xiaomi_redmi-ax5400
 endef
 TARGET_DEVICES += xiaomi_redmi-ax5400
+
+define Device/redmi_ax3000
+  $(call Device/xiaomi_ipq50xx_ax_base)
+  DEVICE_VENDOR := Redmi
+  DEVICE_MODEL := AX3000
+  DEVICE_DTS := ipq5018-ax3000
+  DEVICE_DTS_CONFIG := config@mp02.1
+  DEVICE_PACKAGES := \
+	ath11k-firmware-ipq5018 \
+	ath11k-firmware-qcn6122 \
+	ipq-wifi-redmi_ax3000
+endef
+TARGET_DEVICES += redmi_ax3000
