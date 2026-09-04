@@ -1,0 +1,16 @@
+#!/bin/sh /etc/rc.common
+
+START=12
+
+start() {
+	case $(board_name) in
+	redmi,ax3000)
+		sysctl -qw vm.watermark_boost_factor=0
+		sysctl -qw vm.min_free_kbytes=8192
+		;;
+	esac
+}
+
+boot() {
+	start
+}
