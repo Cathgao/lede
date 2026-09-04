@@ -1,0 +1,6 @@
+#!/bin/sh
+
+[ "${ACTION}" = "add" ] && {
+	/sbin/wifi config
+	[ -f /etc/board.json ] && ubus call network.wireless retry
+}

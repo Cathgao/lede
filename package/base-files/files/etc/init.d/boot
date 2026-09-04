@@ -53,6 +53,7 @@ boot() {
 
 	/bin/config_generate
 	uci_apply_defaults
+	[ ! -f /etc/config/wireless ] && [ -x /sbin/wifi ] && /sbin/wifi config
 	sync
 
 	# temporary hack until configd exists
